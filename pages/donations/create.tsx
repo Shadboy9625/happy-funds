@@ -1,14 +1,13 @@
 import NavBtn from '@/components/NavBtn'
+import { createCharity } from '@/services/blockchain'
 import { CharityParams } from '@/utils/type.dt'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useAccount } from 'wagmi'
-import { useRouter } from 'next/router'
 
 const Page: NextPage = () => {
-  const router = useRouter()
   const { address } = useAccount()
   const [charity, setCharity] = useState<CharityParams>({
     name: '',
@@ -41,24 +40,22 @@ const Page: NextPage = () => {
 
     if (!address) return toast.warning('Connect wallet first!')
 
-    await toast
-      .promise(
-        new Promise<void>((resolve, reject) => {
-          console.log(charity)
-          resolve()
-        }),
-        {
-          pending: 'Approve transaction...',
-          success: 'Charity created successfully 👌',
-          error: 'Encountered error 🤯',
-        }
-      )
-      .then(() => {
-        router.push('/')
-      })
-      .catch(() => {
-        // handle error if needed
-      })
+    await toast.promise(
+      new Promise<void>((resolve, reject) => {
+        createCharity(charity)
+          .then((tx) => {
+            console.log(tx)
+            resetForm()
+            resolve(tx)
+          })
+          .catch((error) => reject(error))
+      }),
+      {
+        pending: 'Approve transaction...',
+        success: 'Charity created successfully 👌',
+        error: 'Encountered error 🤯',
+      }
+    )
   }
 
   const resetForm = () => {
@@ -140,7 +137,7 @@ const Page: NextPage = () => {
                   type="text"
                   name="image"
                   placeholder="Image URL"
-                  pattern="https?://.+(\.png|\.jpg|\.jpeg|\.gif)"
+                  pattern="https?://.+(\.(jpg|png|gif))?$"
                   title="Please enter a valid image URL (http(s)://...(.png|.jpg|.jpeg|.gif))"
                   required
                   value={charity.image}
