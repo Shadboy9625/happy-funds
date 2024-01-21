@@ -3,7 +3,7 @@
 <!-- Read the full tutorial here: **[>> How to build a Decentralized Event Marketplace with Next.js, TypeScript, Tailwind CSS, and Solidity](https://daltonic.github.io)** -->
 
 ![Charity Marketplace](./screenshots/1.png)
-The `DappFund.sol` project is a Solidity-written Ethereum smart contract that serves as the backbone of a decentralized application (dApp) for charity purposes. It leverages the OpenZeppelin library to ensure secure and standardized development of the contract.
+The `happyFund.sol` project is a Solidity-written Ethereum smart contract that serves as the backbone of a decentralized application (dApp) for charity purposes. It leverages the OpenZeppelin library to ensure secure and standardized development of the contract.
 
 ![Charity Marketplace](./screenshots/2.png)
 The contract is designed around two primary structures: **CharityStruct** and **SupportStruct**, representing a charity and a supporter, respectively.
