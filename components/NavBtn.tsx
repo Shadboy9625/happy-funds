@@ -5,9 +5,11 @@ import { Menu } from '@headlessui/react'
 import Link from 'next/link'
 import { globalActions } from '@/store/globalSlices'
 import { useAccount } from 'wagmi'
+import { useDispatch } from 'react-redux'
 
 const NavBtn: React.FC<{ donationId?: number; owner?: string }> = ({ donationId, owner }) => {
   const { address } = useAccount()
+  const dispatch = useDispatch()
   const { setDeleteModal } = globalActions
 
   const menuItems = [
@@ -79,6 +81,7 @@ const NavBtn: React.FC<{ donationId?: number; owner?: string }> = ({ donationId,
                         active ? 'text-white bg-red-600' : 'text-red-600'
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm
                       hover:bg-red-600 hover:text-white`}
+                      onClick={() => dispatch(setDeleteModal('scale-100'))}
                     >
                       <span>Delete Charity</span>
                     </button>
