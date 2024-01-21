@@ -63,7 +63,6 @@ const Payment: React.FC<ComponentProp> = ({ charity, supports, owner }) => {
             className="bg-[#ffe700] py-3 px-20 rounded-xl
           transition-all duration-300 ease-in-out
           hover:bg-[#fff600]"
-            onClick={() => dispatch(setDonorModal('scale-100'))}
           >
             Donate now
           </button>

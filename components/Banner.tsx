@@ -1,18 +1,29 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { MdSunnySnowing } from 'react-icons/md'
-import gaza from '@/public/gaza.jpg'
-import happy from '@/public/happy.jpg'
-import budha from '@/public/budha.jpg'
-import disabled from '@/public/disabled.jpg'
 import charity from '@/public/charity.jpg'
+import poor from '@/public/poor.jpg'
+import kids from '@/public/kids.jpg'
+import boy from '@/public/boy.jpg'
+import monk from '@/public/monks.jpg'
+import orphan from '@/public/orphan.jpg'
 
-const IMAGE_BANNER = 'https://cdn.pixabay.com/photo/2016/11/14/04/14/monks-1822569_1280.jpg'
+const images = [charity, poor, kids, orphan, boy, monk]
+
 const Banner: React.FC<{ mine?: boolean }> = ({ mine }) => {
+  const [currentImage, setCurrentImage] = useState(images[0])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage(images[(images.indexOf(currentImage) + 1) % images.length])
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [currentImage])
+
   return (
     <div
-      style={{ backgroundImage: 'url(' + IMAGE_BANNER + ')' }}
+      style={{ backgroundImage: `url(${currentImage.src})` }}
       className="relative w-full h-[44rem] flex items-center justify-center text-white
       bg-no-repeat bg-cover bg-center"
     >
@@ -29,12 +40,18 @@ const Banner: React.FC<{ mine?: boolean }> = ({ mine }) => {
         )}
         <Link
           href={'/donations/create'}
-          className="bg-white text-[#FF005C] px-4 space-x-1
-        flex justify-center items-center rounded-full text-center py-3
-        transition duration-300 ease-in-out border-2 border-transparent hover:border-[#FF005C]"
+          className="bg-[rgba(255,255,255,0.55)] text-[#FF005C] px-4 space-x-1
+flex justify-center items-center rounded-full text-center py-3
+transition duration-300 ease-in-out border-2 border-transparent hover:border-[#FF005C] backdrop-filter backdrop-blur-lg"
         >
-          <Image src="/HappyFunds(pinkYellow).svg" alt="Happy" width={25} height={25} />
-          <span>Start a Happy Fund</span>
+          <Image
+            className="mr-2"
+            src="/HappyFunds(pinkYellow).svg"
+            alt="Happy"
+            width={25}
+            height={25}
+          />
+          <span className="font-bold">Start a Happy Fund</span>
         </Link>
       </div>
     </div>

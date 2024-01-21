@@ -1,16 +1,21 @@
 import React from 'react'
 import { HiChevronDown } from 'react-icons/hi'
+import { RxHamburgerMenu } from 'react-icons/rx'
 import { Menu } from '@headlessui/react'
 import Link from 'next/link'
+import { globalActions } from '@/store/globalSlices'
 import { useAccount } from 'wagmi'
 
 const NavBtn: React.FC<{ donationId?: number; owner?: string }> = ({ donationId, owner }) => {
   const { address } = useAccount()
+  const { setDeleteModal } = globalActions
 
   const menuItems = [
     { href: '/', label: 'Home' },
     { href: '/donations/create', label: 'Create Charity' },
-    { href: '/projects', label: 'My Charities' },
+    { href: '/projects', label: 'My Projects' },
+    { href: '/whoweare', label: 'Who We Are' },
+    { href: '/techused', label: 'Technologies Used' },
   ]
 
   return (
@@ -19,19 +24,19 @@ const NavBtn: React.FC<{ donationId?: number; owner?: string }> = ({ donationId,
         <>
           <Menu.Button
             className="p-3 bg-[#FF005C] rounded-full text-white shadow-lg
-          fixed right-10 bottom-10"
+          fixed left-10 top-10 z-50"
           >
-            <HiChevronDown
+            <RxHamburgerMenu
               size={17}
               className={
                 open
-                  ? 'rotate-180 transform transition-transform duration-300'
+                  ? 'scale-125 transform transition-transform duration-300'
                   : 'transform transition-transform duration-300'
               }
             />
           </Menu.Button>
           <Menu.Items
-            className="fixed right-10 bottom-[90px] w-56 origin-top-right
+            className="fixed left-10 top-[90px] w-56 origin-top-right
             divide-y divide-gray-200 rounded-md shadow-lg
             ing-1 ring-opacity-5 focus:outline-none border border-gray-200"
           >
