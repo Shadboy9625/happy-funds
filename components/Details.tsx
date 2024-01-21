@@ -25,7 +25,6 @@ const Details: React.FC<ComponentProp> = ({ charity, supports }) => {
       <hr className="border-t border-gray-300" />
 
       <p>{charity?.description}</p>
-      <div className="flex justify-start items-center space-x-4"></div>
 
       <hr className="border-t border-gray-300" />
 

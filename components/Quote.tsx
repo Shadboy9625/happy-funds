@@ -14,7 +14,7 @@ const Quote = () => {
         <h1 className="font-semibold text-5xl">We've got you covered.</h1>
         <p className="w-full lg:w-2/4">
           With a global team dedicated to trust and safety, we’ve successfully managed fundraisers
-          worldwide. Don’t worry about a thing, we’ve got it covered.
+          worldwide for over a decade. Don’t worry about a thing, we’ve got it covered.
         </p>
 
         <div className="flex">
@@ -22,7 +22,7 @@ const Quote = () => {
             href={'/donations/create'}
             className="bg-white text-[#FF005C] px-4 space-x-1
             flex justify-center items-center rounded-full text-center py-3
-            transition duration-300 ease-in-out hover:bg-[#FF005C] hover:text-white"
+            transition duration-300 ease-in-out hover:bg-[#ff1010] hover:text-white"
           >
             <MdChevronRight size={25} />
             <span>Start a Happy Fund</span>

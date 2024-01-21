@@ -37,9 +37,9 @@ const ConnectBtn: React.FC = () => {
                 return (
                   <button
                     className="bg-transparent border border-[#FF005C] hover:bg-[#ff2775]
-                  py-2 px-6 text-[#FF005C] hover:text-white rounded-full
-                  transition duration-300 ease-in-out"
-                    onClick={openAccountModal}
+                        py-2 px-6 text-[#FF005C] hover:text-white rounded-full
+                        transition duration-300 ease-in-out"
+                    onClick={openConnectModal}
                     type="button"
                   >
                     Connect Wallet
@@ -50,7 +50,7 @@ const ConnectBtn: React.FC = () => {
               if (chain.unsupported) {
                 return (
                   <button
-                    className="bg-transparent border border-[#ff0000] hover:bg-[#FF0000]
+                    className="bg-transparent border border-[#FF005C] hover:bg-[#ff2775]
                         py-2 px-6 text-[#FF005C] hover:text-white rounded-full
                         transition duration-300 ease-in-out"
                     onClick={openChainModal}
@@ -66,7 +66,7 @@ const ConnectBtn: React.FC = () => {
                   <button
                     onClick={openChainModal}
                     style={{ display: 'flex', alignItems: 'center' }}
-                    className="bg-transparent border border-[#FF005C] hover:bg-[#FF0000]
+                    className="bg-transparent border border-[#FF005C] hover:bg-[#ff2775]
                     py-2 px-6 text-[#FF005C] hover:text-white rounded-full
                     transition duration-300 ease-in-out"
                     type="button"
@@ -96,7 +96,7 @@ const ConnectBtn: React.FC = () => {
                   </button>
 
                   <button
-                    className="bg-transparent border border-[#FF005C] hover:bg-[#FF0000]
+                    className="bg-transparent border border-[#FF005C] hover:bg-[#ff2775]
                     py-2 px-6 text-[#FF005C] hover:text-white rounded-full
                     transition duration-300 ease-in-out"
                     onClick={openAccountModal}

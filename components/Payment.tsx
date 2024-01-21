@@ -2,6 +2,8 @@ import React from 'react'
 import Donation from './Donation'
 import { FaBan, FaEthereum } from 'react-icons/fa'
 import { CharityStruct, SupportStruct } from '@/utils/type.dt'
+import { useDispatch } from 'react-redux'
+import { globalActions } from '@/store/globalSlices'
 import { useAccount } from 'wagmi'
 
 interface ComponentProp {
@@ -12,6 +14,8 @@ interface ComponentProp {
 
 const Payment: React.FC<ComponentProp> = ({ charity, supports, owner }) => {
   const { address } = useAccount()
+  const dispatch = useDispatch()
+  const { setSupportModal, setDonorModal, setBanModal } = globalActions
 
   return (
     <div
@@ -63,6 +67,7 @@ const Payment: React.FC<ComponentProp> = ({ charity, supports, owner }) => {
             className="bg-[#ffe700] py-3 px-20 rounded-xl
           transition-all duration-300 ease-in-out
           hover:bg-[#fff600]"
+            onClick={() => dispatch(setDonorModal('scale-100'))}
           >
             Donate now
           </button>
@@ -84,8 +89,9 @@ const Payment: React.FC<ComponentProp> = ({ charity, supports, owner }) => {
         ))}
       </div>
 
-      <div className="flex justify-start items-center space-x-4">
+      <div className="flex justify-start items-center space-x-1">
         <button
+          onClick={() => dispatch(setSupportModal('scale-100'))}
           className="border border-gray-300 py-2 px-4 rounded-lg font-medium
           transition-all duration-300 ease-in-out
          hover:bg-gray-100"
@@ -93,6 +99,7 @@ const Payment: React.FC<ComponentProp> = ({ charity, supports, owner }) => {
           See all
         </button>
         <button
+          onClick={() => dispatch(setSupportModal('scale-100'))}
           className="border border-gray-300 py-2 px-4 rounded-lg font-medium
           transition-all duration-300 ease-in-out
          hover:bg-gray-100"
@@ -102,6 +109,7 @@ const Payment: React.FC<ComponentProp> = ({ charity, supports, owner }) => {
 
         {owner === address && (
           <button
+            onClick={() => dispatch(setBanModal('scale-100'))}
             className="border border-gray-300 py-2 px-4 rounded-lg font-medium
           transition-all duration-300 ease-in-out
          hover:bg-red-100"

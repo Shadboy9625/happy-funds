@@ -7,7 +7,8 @@ import { Providers } from '@/services/provider'
 import type { AppProps } from 'next/app'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-
+import { Provider } from 'react-redux'
+import { store } from '@/store'
 import { useRouter } from 'next/router'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -23,23 +24,25 @@ export default function App({ Component, pageProps }: AppProps) {
   } else {
     return (
       <Providers pageProps={pageProps}>
-        <div className="min-h-screen relative">
-          {router.pathname !== '/whoweare' && router.pathname !== '/techused' && <Header />}{' '}
-          <Component {...pageProps} />
-          {router.pathname !== '/whoweare' && router.pathname !== '/techused' && <Footer />}{' '}
-          <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
-        </div>
+        <Provider store={store}>
+          <div className="min-h-screen relative">
+            {router.pathname !== '/whoweare' && router.pathname !== '/techused' && <Header />}{' '}
+            <Component {...pageProps} />
+            {router.pathname !== '/whoweare' && router.pathname !== '/techused' && <Footer />}{' '}
+            <ToastContainer
+              position="bottom-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+          </div>
+        </Provider>
       </Providers>
     )
   }

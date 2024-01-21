@@ -1,21 +1,34 @@
 import React from 'react'
 import { TfiClose } from 'react-icons/tfi'
 import { BsTrash3 } from 'react-icons/bs'
-import { CharityStruct } from '@/utils/type.dt'
+import { useDispatch, useSelector } from 'react-redux'
+import { CharityStruct, RootState } from '@/utils/type.dt'
+import { globalActions } from '@/store/globalSlices'
 import { useAccount } from 'wagmi'
 import { toast } from 'react-toastify'
+import { deleteCharity } from '@/services/blockchain'
+import { useRouter } from 'next/router'
 
 const Delete: React.FC<{ charity: CharityStruct }> = ({ charity }) => {
   const { address } = useAccount()
-  const deleteModal = 'scale-0'
+  const { deleteModal } = useSelector((states: RootState) => states.globalStates)
+  const dispatch = useDispatch()
+  const { setDeleteModal } = globalActions
+  const router = useRouter()
 
   const handleDelete = async () => {
     if (!address) return toast.warning('Connect wallet first!')
 
     await toast.promise(
       new Promise<void>((resolve, reject) => {
-        console.log(charity)
-        resolve()
+        deleteCharity(charity.id)
+          .then((tx) => {
+            dispatch(setDeleteModal('scale-0'))
+            router.push('/')
+            console.log(tx)
+            resolve(tx)
+          })
+          .catch((error) => reject(error))
       }),
       {
         pending: 'Approve transaction...',
@@ -34,7 +47,11 @@ const Delete: React.FC<{ charity: CharityStruct }> = ({ charity }) => {
         <div className="flex flex-col space-y-2">
           <div className="flex flex-row justify-between items-center">
             <p className="font-medium text-2xl">Delete</p>
-            <button type="button" className="border-0 bg-transparent focus:outline-none">
+            <button
+              onClick={() => dispatch(setDeleteModal('scale-0'))}
+              type="button"
+              className="border-0 bg-transparent focus:outline-none"
+            >
               <TfiClose className="text-black" />
             </button>
           </div>
